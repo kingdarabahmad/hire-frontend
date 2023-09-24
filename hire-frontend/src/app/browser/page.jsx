@@ -9,7 +9,7 @@ const BrowserPage = () => {
   const [testModal, setTestModal] = useState(false)
   return (
     <div className='w-full'>
-      <div className='flex flex-col gap-2 border-b-2 border-gray-500'>
+      <div className='flex flex-col gap-2 border-b-2 shadow-md'>
 
         <div className='flex justify-end'>
 

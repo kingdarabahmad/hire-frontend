@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import SearchBar from "./searchBar";
 import BrowserPane from "./browserPane";
+import TabModal from './tabModal';
 
 
 const proxiedUrl = (url) => {
@@ -10,13 +11,14 @@ const proxiedUrl = (url) => {
 
 
 const BrowserMainComponent = () => {
+    
     const [tabs, setTabs]=useState([{
         history:[proxiedUrl(("https://google.com"))],
         activeIndex:0,
     }])
 
   const [activeTab, setActiveTab] = useState(0);
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isTabModalOpen, setIsTabModalOpen] = useState(false);
 
     
   const handleSearch = (query)=>{
@@ -60,7 +62,7 @@ const BrowserMainComponent = () => {
             history: [e.target.href],
             activeIndex: 0,
         });
-
+        console.log('clicked happened')
         setTabs(newTabs);
         setActiveTab(newTabs.length - 1);
     }
@@ -80,7 +82,7 @@ const BrowserMainComponent = () => {
           {/* search bar */}
           <SearchBar onSearch={handleSearch}/>
           {/* tabs */}
-          <div className='flex flex-col text-sm font-bold justify-center w-[80px] p-2 rounded-lg bg-blue-300 ' onChange={(index) => setActiveTab(index)}>
+          <div className='flex cursor-pointer flex-col text-sm font-bold justify-center w-[80px] p-2 rounded-lg bg-blue-300 ' onChange={(index) => setActiveTab(index)} onClick={()=>setIsTabModalOpen(true)}>
             {
               tabs.map((_,index)=>(
                 <div className='text-sm text-center' key={index}>
@@ -95,6 +97,7 @@ const BrowserMainComponent = () => {
         <BrowserPane url={tabs[activeTab].history[tabs[activeTab].activeIndex]}/>
 
         {/* Modal */}
+        <TabModal tabs={tabs} setActiveTab={setActiveTab} isTabModalOpen={isTabModalOpen} setIsTabModalOpen={setIsTabModalOpen}/>
     </div>
   );
 }
