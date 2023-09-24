@@ -27,7 +27,7 @@ const TabModal = ({setActiveTab,tabs,isTabModalOpen,setIsTabModalOpen}) => {
                 </Typography>
                 <div className='flex flex-col gap-2'>
                     {tabs.map((tab,index)=>(
-                        <div key={index} onClick={()=>{
+                        <div className='break-words' key={index} onClick={()=>{
                             setActiveTab(index)
                             setIsTabModalOpen(false)
                         }}>
